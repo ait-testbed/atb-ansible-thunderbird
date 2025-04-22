@@ -6,7 +6,7 @@ galaxy_info:
   author: thorinaboenke
   description: Thunderbird for Linux.
   company: "AIT (Austrian Institute of Technology)"
-  license: "license (BSD, MIT)"
+  license: GPL-3.0
   min_ansible_version: 2.10
   platforms:
     - name: Ubuntu
