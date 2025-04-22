@@ -1,31 +1,43 @@
-# Ansible role for Thunderbird
+# Ansible Role: Thunderbird 
 
-This role installs Thunderbird and optionally generates dummy emails in the users thunderbird profile.
+Installs the Mozilla Thunderbird email client on supported systems.
 
-# Requirements
-- Ubuntu
+Optionally, this role can populate the specified user's default Thunderbird profile with dummy emails (in mbox format) within the "Local Folders" Inbox, primarily for testing or demonstration purposes.
 
+## Requirements
 
+*   **Root Access:** Requires `become: yes` to install packages system-wide.
+*   **Target OS:** Currently tested and supported on **Ubuntu**. May work on other Debian-based distributions but is not guaranteed.
+*   **Ansible Version:** 2.9 or higher recommended.
 
-# Usage
+## Role Variables
 
-Simply put this role to the "roles"-folder and use the following playbook.yml:
-```
-- hosts: localhost
-  become: true
+Available variables are listed below, along with default values (see `defaults/main.yml`):
+
+| Variable           | Required | Default | Description                                                                                                                               |
+| ------------------ | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `thunderbird_user` | Yes      | `None`  | The **username** on the target system for whom the Thunderbird profile should be checked/populated. |
+| `populate_emails`  | No       | `false` | Set to `true` to generate a basic mbox file containing dummy emails within the user's default profile (`*.default-release/Mail/Local Folders/Inbox`). |
+
+## Dependencies
+
+None.
+
+## Example Playbook
+
+Here's how to use this role in your playbook:
+
+```yaml
+---
+- hosts: localhost # or specific group
+  become: yes
+  vars:
+    # Required: Specify the user whose Thunderbird profile will be targeted
+    thunderbird_user: alice
+
+    # Optional: Enable dummy email generation for user 'alice'
+    populate_emails: true
+
   roles:
-    - atb-ansible-thunderbird
-```
-
-
-# Role Variables
-```
-thunderbird_user: Joe
-```
-
-thunderbird profile will be created in this users home directory
-
-```
-populate_emails: true
-```
-if true, generates an mbox file with dummy emails in /home/{{ thunderbird_user }}/.thunderbird/user.default-release/Mail/Local Folders/Inbox
+    # Reference the role, adjust path/name as needed
+    - thunderbird
