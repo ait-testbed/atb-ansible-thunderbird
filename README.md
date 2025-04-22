@@ -41,3 +41,12 @@ Here's how to use this role in your playbook:
   roles:
     # Reference the role, adjust path/name as needed
     - thunderbird
+
+
+## License
+
+GPL-3.0
+
+## Author Information
+
+Thorina Boenke (https://www.ait.ac.at)
